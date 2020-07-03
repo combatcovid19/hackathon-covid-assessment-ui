@@ -6,6 +6,7 @@ function Profile(props) {
     const f = props.profile;
   return (
     <Form noValidate onSubmit={props.submitProfileDetail}>
+        <p>Please Provide personal detail to start assessment.</p>
           <Form.Row>
             <Form.Group as={Col} md="12" controlId="formGridState">
                 <Form.Label>Please Select Country:</Form.Label>
@@ -27,6 +28,8 @@ function Profile(props) {
                 onChange={props.profileFormHandler}
                 placeholder="Enter Name"
               />
+              {props.errors.name.length > 0 && 
+                <span className='error'>{props.errors.name}</span>}
             </Form.Group>
             <Form.Group as={Col} md="6" controlId="validationFormik01">
               <Form.Label as="legend" column sm={2}>

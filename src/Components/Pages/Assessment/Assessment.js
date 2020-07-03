@@ -19,7 +19,6 @@ class App extends Component {
       country: "default",
       isProfileShow: true,
       profile: {
-        country: "",
         name: "",
         gender: "",
         mobile: "",
@@ -30,6 +29,11 @@ class App extends Component {
         state: "",
         zip: "",
         countryCode: ""      
+      },
+      errors: {
+        name: '',
+        email: '',
+        password: '',
       }
     };
 
@@ -40,16 +44,29 @@ class App extends Component {
   handleCountryChange = (event) => {
     const selectedCountry = event.target.value;
     this.setState({
-      country: selectedCountry,
+      country: selectedCountry
     });
     
     setTimeout(() => console.log("#1###", this.state), 300);
   }
   profileFormHandler = e => {
     let profile = {...this.state.profile};
-    profile[e.target.name] = e.target.value;
+    let errors = this.state.errors;
+    const { name, value } = e.target;
+    profile[name] = value;
+    switch (name) {
+      case 'name': 
+        errors.name = 
+          value.length < 5
+            ? 'Name must be at least 5 characters long!'
+            : '';
+        break;
+      default:
+        break;
+    }
     this.setState({ 
-      profile
+      profile,
+      errors
     });
     
 }
@@ -133,6 +150,7 @@ submitProfileDetail = (e) => {
     return (
       <Profile
         profile = {this.state.profile}
+        errors = {this.state.errors}
         handleCountryChange= {this.handleCountryChange}
         profileFormHandler = {this.profileFormHandler}
         submitProfileDetail = {this.submitProfileDetail}
@@ -151,7 +169,7 @@ submitProfileDetail = (e) => {
     return (
       <section id="assessment-page">
         <section className="l-content">
-          <p>Assessment:</p>          
+          <strong>Self Assessment:</strong>          
           {this.state.isProfileShow ? this.renderProfileForm() : ""}
           {this.state.result ? this.renderResult() : this.renderQuiz()}
         </section>

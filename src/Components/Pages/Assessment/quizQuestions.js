@@ -44,7 +44,7 @@ var quizQuestions = {
             ]
         },
         {
-            question: "Have you traveled anywhere internationally in the last 2-45 days?:",
+            question: "Have you traveled anywhere internationally in the last 20-45 days?:",
             answers: [
                 {
                     type: "traveled",
