@@ -3,7 +3,7 @@
 2. cd covid19-ui
 3. Run "npm install"
 4. Run "npm start"
-5. Open [http://localhost:9000](http://localhost:9000) to view it in the browser.
+5. Open [http://localhost:8000](http://localhost:8000) to view it in the browser.
 
 NOTE: Install NodeJS LTS version from https://nodejs.org/en/ if it is not installed in your machine. Also, you should have github account to clone it, else download code.
 
