@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import quizQuestions from './quizQuestions';
+import states from './states';
 import Quiz from './Quiz';
 import Profile from './Profile';
 import Result from './Result';
@@ -19,19 +20,26 @@ class App extends Component {
       country: "default",
       isProfileShow: true,
       profile: {
-        name: "",
-        gender: "",
-        mobile: "",
+        fname: "",
+        lname: "",
         dob: "",
-        street: "",
+        age: 0,
+        gender: "",
+        email: "",
+        mobile: "",
+        whatsAppNumber: "",
+        country: "",
+        state: "",
+        statesList: [],
+        district: "",
         county: "",
         city: "",
-        state: "",
-        zip: "",
-        countryCode: ""      
+        street: "",
+        zipCode: ""
       },
       errors: {
-        name: '',
+        fname: '',
+        lname: '',
         email: '',
         password: '',
       }
@@ -43,24 +51,50 @@ class App extends Component {
   // country select action.
   handleCountryChange = (event) => {
     const selectedCountry = event.target.value;
+    const statesList = states[selectedCountry];
+    
     this.setState({
-      country: selectedCountry
+      profile: {
+        country: selectedCountry,
+        statesList: statesList
+      }      
     });
     
-    setTimeout(() => console.log("#1###", this.state), 300);
+    setTimeout(() => console.log("#1###", statesList), 300);
+  }
+  calculateAge = (dob) => {
+    if(!dob) {
+      return 0;
+    }
+    var diff_ms = Date.now() - new Date(dob).getTime();
+    var age_dt = new Date(diff_ms);  
+    return Math.abs(age_dt.getUTCFullYear() - 1970);
+  }
+  dobHandler = (dob) => {
+    const age = this.calculateAge(dob);
+    this.setState({ 
+      profile: {
+        dob: dob,
+        age: age
+      }
+    });
   }
   profileFormHandler = e => {
     let profile = {...this.state.profile};
     let errors = this.state.errors;
+    console.log("*****", e);
     const { name, value } = e.target;
     profile[name] = value;
     switch (name) {
-      case 'name': 
+      case 'fname': 
         errors.name = 
           value.length < 5
             ? 'Name must be at least 5 characters long!'
             : '';
         break;
+      // case 'dob':
+      //   this.calculateAge(value);
+      //   break;
       default:
         break;
     }
@@ -154,6 +188,7 @@ submitProfileDetail = (e) => {
         handleCountryChange= {this.handleCountryChange}
         profileFormHandler = {this.profileFormHandler}
         submitProfileDetail = {this.submitProfileDetail}
+        dobHandler = {this.dobHandler}
       />
 
     )
@@ -169,7 +204,6 @@ submitProfileDetail = (e) => {
     return (
       <section id="assessment-page">
         <section className="l-content">
-          <strong>Self Assessment:</strong>          
           {this.state.isProfileShow ? this.renderProfileForm() : ""}
           {this.state.result ? this.renderResult() : this.renderQuiz()}
         </section>
