@@ -4,6 +4,7 @@ import states from './states';
 import Quiz from './Quiz';
 import Profile from './Profile';
 import Result from './Result';
+import { validateForm, calculateAge, formValidation } from "../../../util/utilityFunction";
 
 class App extends Component {
   constructor(props) {
@@ -17,7 +18,6 @@ class App extends Component {
       answer: '',
       answersCount: {},
       result: '',
-      country: "default",
       isProfileShow: true,
       profile: {
         fname: "",
@@ -28,7 +28,7 @@ class App extends Component {
         email: "",
         mobile: "",
         whatsAppNumber: "",
-        country: "",
+        country: "default",
         state: "",
         statesList: [],
         district: "",
@@ -40,8 +40,15 @@ class App extends Component {
       errors: {
         fname: '',
         lname: '',
+        dob: '',
         email: '',
-        password: '',
+        mobile: '',
+        whatsAppNumber: '',
+        country: '',
+        state: '',
+        city: '',
+        street: '',
+        zipCode: ''
       }
     };
 
@@ -50,54 +57,37 @@ class App extends Component {
 
   // country select action.
   handleCountryChange = (event) => {
-    const selectedCountry = event.target.value;
-    const statesList = states[selectedCountry];
-    
-    this.setState({
-      profile: {
-        country: selectedCountry,
-        statesList: statesList
-      }      
-    });
-    
-    setTimeout(() => console.log("#1###", statesList), 300);
-  }
-  calculateAge = (dob) => {
-    if(!dob) {
-      return 0;
+    let profile = {...this.state.profile};
+    profile.country = event.target.value;
+    if(profile.country) {
+      profile.statesList = states[profile.country];
+      this.setState({
+        profile      
+      });
     }
-    var diff_ms = Date.now() - new Date(dob).getTime();
-    var age_dt = new Date(diff_ms);  
-    return Math.abs(age_dt.getUTCFullYear() - 1970);
+    
+    setTimeout(() => console.log("#1###", profile.statesList), 300);
   }
+  
   dobHandler = (dob) => {
-    const age = this.calculateAge(dob);
+    let profile = {...this.state.profile};
+    profile.dob = dob;
+    formValidation(profile, this.state.errors);
+    const age = calculateAge(dob);
+    profile.age = age;
+
     this.setState({ 
-      profile: {
-        dob: dob,
-        age: age
-      }
+      profile
     });
   }
+  
   profileFormHandler = e => {
     let profile = {...this.state.profile};
     let errors = this.state.errors;
-    console.log("*****", e);
     const { name, value } = e.target;
     profile[name] = value;
-    switch (name) {
-      case 'fname': 
-        errors.name = 
-          value.length < 5
-            ? 'Name must be at least 5 characters long!'
-            : '';
-        break;
-      // case 'dob':
-      //   this.calculateAge(value);
-      //   break;
-      default:
-        break;
-    }
+    formValidation(profile, errors);
+    
     this.setState({ 
       profile,
       errors
@@ -106,22 +96,35 @@ class App extends Component {
 }
 submitProfileDetail = (e) => {
   e.preventDefault();
-  const selectedCountry = this.state.country;
-  this.setState({
-    question: quizQuestions[selectedCountry][0].question,
-    answerOptions: quizQuestions[selectedCountry][0].answers,
-    counter: 0,
-    answersCount: 0,
-    questionId: 1,
-    isProfileShow: false
-  });
+  let profile = {...this.state.profile};
+  let errors = this.state.errors;
+  formValidation(profile, errors);
+  if(validateForm(this.state.errors)) {
+    console.info('Valid Form')
+    const selectedCountry = profile.country;
+    this.setState({
+      question: quizQuestions[selectedCountry][0].question,
+      answerOptions: quizQuestions[selectedCountry][0].answers,
+      counter: 0,
+      answersCount: 0,
+      questionId: 1,
+      isProfileShow: false
+    });
+  } else {
+    console.error('Invalid Form', this.state.errors)
+    this.setState({ 
+      profile,
+      errors
+    });
+  }
+  
   setTimeout(() => console.log("#1submit call", this.state), 300);
 }
 
   handleAnswerSelected(event) {
     this.setUserAnswer(event.currentTarget.value);
 
-    if (this.state.questionId < quizQuestions[this.state.country].length) {
+    if (this.state.questionId < quizQuestions[this.state.profile.country].length) {
       setTimeout(() => this.setNextQuestion(), 300);
     } else {
       setTimeout(() => this.setResults(this.getResults()), 300);
@@ -145,8 +148,8 @@ submitProfileDetail = (e) => {
     this.setState({
       counter: counter,
       questionId: questionId,
-      question: quizQuestions[this.state.country][counter].question,
-      answerOptions: quizQuestions[this.state.country][counter].answers,
+      question: quizQuestions[this.state.profile.country][counter].question,
+      answerOptions: quizQuestions[this.state.profile.country][counter].answers,
       answer: ''
     });
   }
@@ -175,7 +178,7 @@ submitProfileDetail = (e) => {
         answerOptions={this.state.answerOptions}
         questionId={this.state.questionId}
         question={this.state.question}
-        questionTotal={quizQuestions[this.state.country].length}
+        questionTotal={quizQuestions[this.state.profile.country].length}
         onAnswerSelected={this.handleAnswerSelected}
       />
     );

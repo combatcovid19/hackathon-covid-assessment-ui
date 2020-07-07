@@ -13,13 +13,14 @@ function Profile(props) {
         <strong>Enter Profile information:</strong>
         <Form.Row>
           <Form.Group as={Col} md="6">
-            <Form.Label>First Name</Form.Label>
+            <Form.Label>First Name<span>*</span></Form.Label>
             <Form.Control
               type="text"
               name="fname"
               value={f.fname}
               onChange={props.profileFormHandler}
               placeholder="Enter First Name"
+              noValidate
             />
             {props.errors.fname.length > 0 && 
               <span className='error'>{props.errors.fname}</span>}
@@ -32,6 +33,7 @@ function Profile(props) {
               value={f.lname}
               onChange={props.profileFormHandler}
               placeholder="Enter Last Name"
+              noValidate
             />
             {props.errors.lname.length > 0 && 
               <span className='error'>{props.errors.lname}</span>}
@@ -39,7 +41,7 @@ function Profile(props) {
         </Form.Row>
         <Form.Row>
           <Form.Group as={Col} md="6">
-            <Form.Label>DOB</Form.Label>
+            <Form.Label>DOB<span>*</span></Form.Label>
             <DatePicker
               name="dob"
               onChange={props.dobHandler}
@@ -47,7 +49,10 @@ function Profile(props) {
               maxDate= {new Date("1/1/2019")}
               minDate= {new Date("1/1/1910")}
               className="col-md-6"
+              noValidate
             />
+            {props.errors.dob.length > 0 && 
+              <span className='error'>{props.errors.dob}</span>}
           </Form.Group>
           <Form.Group as={Col} md="6">
             <Form.Label>AGE</Form.Label>
@@ -55,33 +60,36 @@ function Profile(props) {
           </Form.Group>
         </Form.Row>
         <Form.Row>
-          <Form.Group as={Col} md="6" controlId="validationFormik01">
+          <Form.Group as={Col} md="6">
             <Form.Label as="legend" column sm={2}>
-              Gender
+              Gender<span>*</span>
             </Form.Label>
-            <Col md={6}>
+            <Col md={6} name="gender" onChange={props.profileFormHandler}>
               <Form.Check
                 type="radio"
                 label="Male"
                 name="gender"
+                value="male"
                 id="custom-inline-1"
               />
               <Form.Check
                 type="radio"
                 label="Female"
                 name="gender"
+                value="female"
                 id="custom-inline-2"
               />
               <Form.Check
                 type="radio"
                 label="Other"
                 name="gender"
+                value="other"
                 id="custom-inline-3"
               />
             </Col>
           </Form.Group>
           <Form.Group as={Col} md="6">
-            <Form.Label>Email</Form.Label>
+            <Form.Label>Email<span>*</span></Form.Label>
               <Form.Control
                 type="email"
                 name="email"
@@ -89,11 +97,13 @@ function Profile(props) {
                 onChange={props.profileFormHandler}
                 placeholder="Enter Email"                  
               />
+              {props.errors.email.length > 0 && 
+              <span className='error'>{props.errors.email}</span>}
           </Form.Group>
         </Form.Row>
         <Form.Row>
           <Form.Group as={Col} md="6">
-            <Form.Label>Mobile Nmber</Form.Label>
+            <Form.Label>Mobile Nmber<span>*</span></Form.Label>
               <Form.Control
                 type="tel"
                 name="mobile"
@@ -101,9 +111,11 @@ function Profile(props) {
                 onChange={props.profileFormHandler}
                 placeholder="Enter Mobile"                  
               />
+              {props.errors.mobile.length > 0 && 
+              <span className='error'>{props.errors.mobile}</span>}
           </Form.Group>
           <Form.Group as={Col} md="6">
-            <Form.Label>WhatsApp Number</Form.Label>
+            <Form.Label>WhatsApp Number<span>*</span></Form.Label>
               <Form.Control
                 type="tel"
                 name="whatsAppNumber"
@@ -111,25 +123,31 @@ function Profile(props) {
                 onChange={props.profileFormHandler}
                 placeholder="Enter WhatsApp Number"                  
               />
+              {props.errors.whatsAppNumber.length > 0 && 
+              <span className='error'>{props.errors.whatsAppNumber}</span>}
           </Form.Group>
         </Form.Row>
         <Form.Row>
           <Form.Group as={Col} md="12" controlId="formGridState">
-              <Form.Label>Please Select Country:</Form.Label>
-              <Form.Control as="select" name="country" value={f.country} onChange={props.handleCountryChange} required>
-                  <option selected>Select Country</option>
+              <Form.Label>Please Select Country:<span>*</span></Form.Label>
+              <Form.Control as="select" name="country" value={f.country} onChange={props.handleCountryChange} noValidate>
+                  <option selected value="">Select Country</option>
                   <option value="India">India</option>
                   <option value="USA">USA</option>
                   <option value="Canada">Canada</option>
-              </Form.Control>
+              </Form.Control>              
+            {props.errors.country.length > 0 && 
+              <span className='error'>{props.errors.country}</span>}
           </Form.Group>
         </Form.Row>
         <Form.Row>
           <Form.Group as={Col} md="6">
-            <Form.Label>State</Form.Label>
-            <Form.Control as="select" name="state" value={f.state} onChange={props.handleStateChange} required>
+            <Form.Label>State<span>*</span></Form.Label>
+            <Form.Control as="select" name="state" value={f.state} onChange={props.profileFormHandler} noValidate>
               <StateList data={f.statesList}/>
             </Form.Control>
+              {props.errors.state.length > 0 && 
+                <span className='error'>{props.errors.state}</span>}
           </Form.Group>
           {f.country === "India" ? <Form.Group as={Col} md="6">
             <Form.Label>District</Form.Label>
@@ -154,7 +172,7 @@ function Profile(props) {
         </Form.Row>
         <Form.Row>
           <Form.Group as={Col} md="6">
-            <Form.Label>City</Form.Label>
+            <Form.Label>City<span>*</span></Form.Label>
             <Form.Control
               type="text"
               placeholder="city"
@@ -162,9 +180,11 @@ function Profile(props) {
               value={f.city}
               onChange={props.profileFormHandler}
             />
+            {props.errors.city.length > 0 && 
+              <span className='error'>{props.errors.city}</span>}
           </Form.Group>
           <Form.Group as={Col} md="6">
-            <Form.Label>City</Form.Label>
+            <Form.Label>Street<span>*</span></Form.Label>
             <Form.Control
               type="text"
               placeholder="street"
@@ -172,11 +192,13 @@ function Profile(props) {
               value={f.street}
               onChange={props.profileFormHandler}
             />
+            {props.errors.street.length > 0 && 
+              <span className='error'>{props.errors.street}</span>}
           </Form.Group>
         </Form.Row>
         <Form.Row>
           <Form.Group as={Col} md="6">
-            <Form.Label>Zip Code</Form.Label>
+            <Form.Label>Zip Code<span>*</span></Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter ZipCode"
@@ -184,6 +206,8 @@ function Profile(props) {
               value={f.zipCode}
               onChange={props.profileFormHandler}
             />
+            {props.errors.zipCode.length > 0 && 
+              <span className='error'>{props.errors.zipCode}</span>}
           </Form.Group>
         </Form.Row>
         <Button className="float-right" type="submit">Start Assessment</Button>
