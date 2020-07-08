@@ -4,9 +4,10 @@ import states from './states';
 import Quiz from './Quiz';
 import Profile from './Profile';
 import Result from './Result';
+// import { axios } from 'axios';
 import { validateForm, calculateAge, formValidation } from "../../../util/utilityFunction";
 
-class App extends Component {
+class Assessment extends Component {
   constructor(props) {
     super(props);
 
@@ -55,6 +56,17 @@ class App extends Component {
     this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
   }
 
+  // componentDidMount() {
+  //   axios.all([
+  //     axios.get('/country'),
+  //     axios.get('/gender')
+  //   ])
+  //   .then(response => {
+  //     console.log('Country List: ', response[0]);
+  //     console.log('Gender List: ', response[1]);
+  //   });
+  // }
+
   // country select action.
   handleCountryChange = (event) => {
     let profile = {...this.state.profile};
@@ -81,6 +93,26 @@ class App extends Component {
     });
   }
   
+  mobileHandler = (e) => {
+    let profile = {...this.state.profile};
+    let errors = this.state.errors;
+    profile["mobile"] = e;
+    formValidation(profile, errors);
+    this.setState({ 
+      profile,
+      errors
+    });
+  }
+  whatsappHandler = (e) => {
+    let profile = {...this.state.profile};
+    let errors = this.state.errors;
+    profile["whatsAppNumber"] = e;
+    formValidation(profile, errors);
+    this.setState({ 
+      profile,
+      errors
+    });
+  }
   profileFormHandler = e => {
     let profile = {...this.state.profile};
     let errors = this.state.errors;
@@ -192,6 +224,8 @@ submitProfileDetail = (e) => {
         profileFormHandler = {this.profileFormHandler}
         submitProfileDetail = {this.submitProfileDetail}
         dobHandler = {this.dobHandler}
+        mobileHandler = {this.mobileHandler}
+        whatsappHandler = {this.whatsappHandler}
       />
 
     )
@@ -218,4 +252,4 @@ submitProfileDetail = (e) => {
   }
 }
 
-export default App;
+export default Assessment;

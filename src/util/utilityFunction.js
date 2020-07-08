@@ -51,20 +51,20 @@ export function formValidation(profile, errors){
     // mobile.
     if (!profile['mobile']) {
         errors["mobile"] = "Please enter Mobile Number.";
-    } else if (!validNmberRegex(profile['mobile'])) {
-        errors["mobile"] = "Please enter only number.";
-    } else if (profile['mobile'].length != 10) {
-        errors["mobile"] = "Please enter valid phone number.";
+    // } else if (!validNmberRegex(profile['mobile'])) {
+    //     errors["mobile"] = "Please enter only number.";
+    // } else if (profile['mobile'].length != 10) {
+    //     errors["mobile"] = "Please enter valid phone number.";
     } else {
         errors["mobile"] = "";
     }
     // whatsapp number
     if (!profile['whatsAppNumber']) {
         errors["whatsAppNumber"] = "Please enter whatsApp Number.";
-    } else if (!validNmberRegex(profile['whatsAppNumber'])) {
-        errors["whatsAppNumber"] = "Please enter only number.";
-    } else if (profile['whatsAppNumber'].length != 10) {
-        errors["whatsAppNumber"] = "Please enter valid whatsApp number.";
+    // } else if (!validNmberRegex(profile['whatsAppNumber'])) {
+    //     errors["whatsAppNumber"] = "Please enter only number.";
+    // } else if (profile['whatsAppNumber'].length != 10) {
+    //     errors["whatsAppNumber"] = "Please enter valid whatsApp number.";
     } else {
         errors["whatsAppNumber"] = "";
     }

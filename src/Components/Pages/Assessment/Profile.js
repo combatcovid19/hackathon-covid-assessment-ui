@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import DatePicker from 'react-date-picker';
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 import StateList from "./StateList";
-import { Form, Button, Col, InputGroup } from 'react-bootstrap';
+import { Form, Button, Col } from 'react-bootstrap';
 
 function Profile(props) {
     const f = props.profile;
+    
   return (
     <Form noValidate onSubmit={props.submitProfileDetail}>
         <h4>This is a Covid symptoms assessment tool.</h4>
@@ -104,25 +107,37 @@ function Profile(props) {
         <Form.Row>
           <Form.Group as={Col} md="6">
             <Form.Label>Mobile Nmber<span>*</span></Form.Label>
-              <Form.Control
+            <PhoneInput
+              placeholder="Enter phone number"
+              name="mobile"
+              value={f.mobile}
+              onChange={props.mobileHandler}
+              />
+              {/* <Form.Control
                 type="tel"
                 name="mobile"
                 value={f.mobile}
                 onChange={props.profileFormHandler}
                 placeholder="Enter Mobile"                  
-              />
+              /> */}
               {props.errors.mobile.length > 0 && 
               <span className='error'>{props.errors.mobile}</span>}
           </Form.Group>
           <Form.Group as={Col} md="6">
             <Form.Label>WhatsApp Number<span>*</span></Form.Label>
-              <Form.Control
+            <PhoneInput
+              placeholder="Enter whatsApp Number"
+              name="whatsAppNumber"
+              value={f.whatsAppNumber}
+              onChange={props.whatsappHandler}
+              />
+              {/* <Form.Control
                 type="tel"
                 name="whatsAppNumber"
                 value={f.whatsAppNumber}
                 onChange={props.profileFormHandler}
                 placeholder="Enter WhatsApp Number"                  
-              />
+              /> */}
               {props.errors.whatsAppNumber.length > 0 && 
               <span className='error'>{props.errors.whatsAppNumber}</span>}
           </Form.Group>

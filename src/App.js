@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import InnerHeader from "./Components/organisms/InnerHeader/InnerHeader.js";
 import Assessment from "./Components/Pages/Assessment/Assessment.js";
+import Providers from "./Components/Pages/Providers/Providers.js";
 
 const NavRoute = ({exact, path, component: Component}) => (
   <Route exact={exact} path={path} render={(props) => (
@@ -20,6 +21,7 @@ function App() {
       <Router>
         <Switch>
           <NavRoute exact component={Assessment} exact path="/" />
+          <NavRoute exact component={Providers} exact path="/provider" />
         </Switch>
       </Router>
       {/* <Footer/> */}
