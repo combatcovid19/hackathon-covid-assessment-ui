@@ -4,19 +4,18 @@ import DatePicker from 'react-date-picker';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import StateList from "./StateList";
-import { Form, Button, Col } from 'react-bootstrap';
+import { Form, Button, Col, } from 'react-bootstrap';
+
+import Row from 'react-bootstrap/Row';
 
 function Profile(props) {
     const f = props.profile;
     
   return (
-    <Form noValidate onSubmit={props.submitProfileDetail}>
-        <h4>This is a Covid symptoms assessment tool.</h4>
-        <h4>Provide the required information for self-assessment related to Covid.</h4>
-        <strong>Enter Profile information:</strong>
+    <div className="col-sm-8 offset-sm-2 form-container pd-top-bottom-30">
+      <Form noValidate onSubmit={props.submitProfileDetail}>
         <Form.Row>
-          <Form.Group as={Col} md="6">
-            <Form.Label>First Name<span>*</span></Form.Label>
+          <Form.Group as={Col} sm="6">
             <Form.Control
               type="text"
               name="fname"
@@ -28,8 +27,7 @@ function Profile(props) {
             {props.errors.fname.length > 0 && 
               <span className='error'>{props.errors.fname}</span>}
           </Form.Group>
-          <Form.Group as={Col} md="6">
-            <Form.Label>Last Name</Form.Label>
+          <Form.Group as={Col} sm="6">
             <Form.Control
               type="text"
               name="lname"
@@ -43,31 +41,34 @@ function Profile(props) {
           </Form.Group>
         </Form.Row>
         <Form.Row>
-          <Form.Group as={Col} md="6">
-            <Form.Label>DOB<span>*</span></Form.Label>
+          <Form.Group as={Col} sm="6">
+          <Form.Row>
+        
+          <Form.Group as={Col} sm="9">
             <DatePicker
               name="dob"
               onChange={props.dobHandler}
               value={f.dob}
               maxDate= {new Date("1/1/2019")}
               minDate= {new Date("1/1/1910")}
-              className="col-md-6"
               noValidate
             />
             {props.errors.dob.length > 0 && 
               <span className='error'>{props.errors.dob}</span>}
           </Form.Group>
-          <Form.Group as={Col} md="6">
-            <Form.Label>AGE</Form.Label>
-            <strong>{f.age}</strong>
+          <Form.Group as={Col} sm="3" className="flex-v-align-center">
+            <Form.Label>AGE:  <strong>{f.age}</strong></Form.Label>
+            
           </Form.Group>
-        </Form.Row>
-        <Form.Row>
+          </Form.Row>
+        
+          </Form.Group>
           <Form.Group as={Col} md="6">
+            <Form.Row>
             <Form.Label as="legend" column sm={2}>
               Gender<span>*</span>
             </Form.Label>
-            <Col md={6} name="gender" onChange={props.profileFormHandler}>
+            <Col sm={10} name="gender" onChange={props.profileFormHandler} className="flex-space-evenly-horizontal mr-top-10">
               <Form.Check
                 type="radio"
                 label="Male"
@@ -90,9 +91,9 @@ function Profile(props) {
                 id="custom-inline-3"
               />
             </Col>
+            </Form.Row>
           </Form.Group>
           <Form.Group as={Col} md="6">
-            <Form.Label>Email<span>*</span></Form.Label>
               <Form.Control
                 type="email"
                 name="email"
@@ -103,10 +104,7 @@ function Profile(props) {
               {props.errors.email.length > 0 && 
               <span className='error'>{props.errors.email}</span>}
           </Form.Group>
-        </Form.Row>
-        <Form.Row>
           <Form.Group as={Col} md="6">
-            <Form.Label>Mobile Nmber<span>*</span></Form.Label>
             <PhoneInput
               placeholder="Enter phone number"
               name="mobile"
@@ -123,8 +121,10 @@ function Profile(props) {
               {props.errors.mobile.length > 0 && 
               <span className='error'>{props.errors.mobile}</span>}
           </Form.Group>
+        </Form.Row>
+        <Form.Row>
+          
           <Form.Group as={Col} md="6">
-            <Form.Label>WhatsApp Number<span>*</span></Form.Label>
             <PhoneInput
               placeholder="Enter whatsApp Number"
               name="whatsAppNumber"
@@ -144,7 +144,6 @@ function Profile(props) {
         </Form.Row>
         <Form.Row>
           <Form.Group as={Col} md="12" controlId="formGridState">
-              <Form.Label>Please Select Country:<span>*</span></Form.Label>
               <Form.Control as="select" name="country" value={f.country} onChange={props.handleCountryChange} noValidate>
                   <option selected value="">Select Country</option>
                   <option value="India">India</option>
@@ -227,6 +226,7 @@ function Profile(props) {
         </Form.Row>
         <Button className="float-right" type="submit">Start Assessment</Button>
     </Form>
+    </div>
   )
 }
 

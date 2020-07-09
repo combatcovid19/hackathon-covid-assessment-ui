@@ -69,89 +69,89 @@ class Assessment extends Component {
 
   // country select action.
   handleCountryChange = (event) => {
-    let profile = {...this.state.profile};
+    let profile = { ...this.state.profile };
     profile.country = event.target.value;
-    if(profile.country) {
+    if (profile.country) {
       profile.statesList = states[profile.country];
       this.setState({
-        profile      
+        profile
       });
     }
-    
+
     setTimeout(() => console.log("#1###", profile.statesList), 300);
   }
-  
+
   dobHandler = (dob) => {
-    let profile = {...this.state.profile};
+    let profile = { ...this.state.profile };
     profile.dob = dob;
     formValidation(profile, this.state.errors);
     const age = calculateAge(dob);
     profile.age = age;
 
-    this.setState({ 
+    this.setState({
       profile
     });
   }
-  
+
   mobileHandler = (e) => {
-    let profile = {...this.state.profile};
+    let profile = { ...this.state.profile };
     let errors = this.state.errors;
     profile["mobile"] = e;
     formValidation(profile, errors);
-    this.setState({ 
+    this.setState({
       profile,
       errors
     });
   }
   whatsappHandler = (e) => {
-    let profile = {...this.state.profile};
+    let profile = { ...this.state.profile };
     let errors = this.state.errors;
     profile["whatsAppNumber"] = e;
     formValidation(profile, errors);
-    this.setState({ 
+    this.setState({
       profile,
       errors
     });
   }
   profileFormHandler = e => {
-    let profile = {...this.state.profile};
+    let profile = { ...this.state.profile };
     let errors = this.state.errors;
     const { name, value } = e.target;
     profile[name] = value;
     formValidation(profile, errors);
-    
-    this.setState({ 
-      profile,
-      errors
-    });
-    
-}
-submitProfileDetail = (e) => {
-  e.preventDefault();
-  let profile = {...this.state.profile};
-  let errors = this.state.errors;
-  formValidation(profile, errors);
-  if(validateForm(this.state.errors)) {
-    console.info('Valid Form')
-    const selectedCountry = profile.country;
+
     this.setState({
-      question: quizQuestions[selectedCountry][0].question,
-      answerOptions: quizQuestions[selectedCountry][0].answers,
-      counter: 0,
-      answersCount: 0,
-      questionId: 1,
-      isProfileShow: false
-    });
-  } else {
-    console.error('Invalid Form', this.state.errors)
-    this.setState({ 
       profile,
       errors
     });
+
   }
-  
-  setTimeout(() => console.log("#1submit call", this.state), 300);
-}
+  submitProfileDetail = (e) => {
+    e.preventDefault();
+    let profile = { ...this.state.profile };
+    let errors = this.state.errors;
+    formValidation(profile, errors);
+    if (validateForm(this.state.errors)) {
+      console.info('Valid Form')
+      const selectedCountry = profile.country;
+      this.setState({
+        question: quizQuestions[selectedCountry][0].question,
+        answerOptions: quizQuestions[selectedCountry][0].answers,
+        counter: 0,
+        answersCount: 0,
+        questionId: 1,
+        isProfileShow: false
+      });
+    } else {
+      console.error('Invalid Form', this.state.errors)
+      this.setState({
+        profile,
+        errors
+      });
+    }
+
+    setTimeout(() => console.log("#1submit call", this.state), 300);
+  }
 
   handleAnswerSelected(event) {
     this.setUserAnswer(event.currentTarget.value);
@@ -218,36 +218,37 @@ submitProfileDetail = (e) => {
   renderProfileForm() {
     return (
       <Profile
-        profile = {this.state.profile}
-        errors = {this.state.errors}
-        handleCountryChange= {this.handleCountryChange}
-        profileFormHandler = {this.profileFormHandler}
-        submitProfileDetail = {this.submitProfileDetail}
-        dobHandler = {this.dobHandler}
-        mobileHandler = {this.mobileHandler}
-        whatsappHandler = {this.whatsappHandler}
+        profile={this.state.profile}
+        errors={this.state.errors}
+        handleCountryChange={this.handleCountryChange}
+        profileFormHandler={this.profileFormHandler}
+        submitProfileDetail={this.submitProfileDetail}
+        dobHandler={this.dobHandler}
+        mobileHandler={this.mobileHandler}
+        whatsappHandler={this.whatsappHandler}
       />
 
     )
   }
 
   renderResult() {
-    return(
+    return (
       <Result quizResult={this.state.result} />
     )
   }
 
   render() {
     return (
-      <section id="assessment-page">
-        <section className="l-content">
-          {this.state.isProfileShow ? this.renderProfileForm() : ""}
-          {this.state.result ? this.renderResult() : this.renderQuiz()}
-        </section>
-        {/* <section className="r-content">
-          
-        </section> */}
-      </section>
+      <div className="row assement-page">
+        <div class="col-sm-10 offset-sm-1">
+          <div className="caption flex-space-between">
+            <div>Profile Details</div>
+            <div><i className="fa fa-map-marker fa-1x .mr-right-5 location" aria-hidden="true"></i>  Current Location</div>
+          </div>
+        </div>
+        {this.state.isProfileShow ? this.renderProfileForm() : ""}
+        {this.state.result ? this.renderResult() : this.renderQuiz()}
+      </div>
     );
   }
 }

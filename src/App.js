@@ -10,7 +10,6 @@ import Providers from "./Components/Pages/Providers/Providers.js";
 const NavRoute = ({exact, path, component: Component}) => (
   <Route exact={exact} path={path} render={(props) => (
     <main id="inner-content">
-      <InnerHeader />
       <Component {...props}/>
     </main>
   )}/>
