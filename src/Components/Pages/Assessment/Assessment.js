@@ -12,6 +12,7 @@ class Assessment extends Component {
     super(props);
 
     this.state = {
+      title: "Profile Details",
       counter: 0,
       questionId: 1,
       question: '',
@@ -131,7 +132,7 @@ class Assessment extends Component {
     let profile = { ...this.state.profile };
     let errors = this.state.errors;
     formValidation(profile, errors);
-    if (validateForm(this.state.errors)) {
+    // if (validateForm(this.state.errors)) {
       console.info('Valid Form')
       const selectedCountry = profile.country;
       this.setState({
@@ -140,15 +141,16 @@ class Assessment extends Component {
         counter: 0,
         answersCount: 0,
         questionId: 1,
-        isProfileShow: false
+        isProfileShow: false,
+        title: "Questionaries"
       });
-    } else {
-      console.error('Invalid Form', this.state.errors)
-      this.setState({
-        profile,
-        errors
-      });
-    }
+    // } else {
+    //   console.error('Invalid Form', this.state.errors)
+    //   this.setState({
+    //     profile,
+    //     errors
+    //   });
+    // }
 
     setTimeout(() => console.log("#1submit call", this.state), 300);
   }
@@ -197,9 +199,16 @@ class Assessment extends Component {
 
   setResults(result) {
     if (result.length === 1) {
-      this.setState({ result: result[0] });
+      this.setState(
+        {
+           result: result[0],
+           title: "Result"
+          });
     } else {
-      this.setState({ result: 'Undetermined' });
+      this.setState({
+        result: 'Undetermined',
+        title: "Result"
+      });
     }
   }
 
@@ -242,8 +251,7 @@ class Assessment extends Component {
       <div className="row assement-page">
         <div class="col-sm-10 offset-sm-1">
           <div className="caption flex-space-between">
-            <div>Profile Details</div>
-            <div><i className="fa fa-map-marker fa-1x .mr-right-5 location" aria-hidden="true"></i>  Current Location</div>
+            <div>{this.state.title}</div>
           </div>
         </div>
         {this.state.isProfileShow ? this.renderProfileForm() : ""}

@@ -15,40 +15,17 @@ function Result(props) {
     RecommendationText = `The ACT recommends follow the guidelines in the ${guidelineLink} provided and talk to doctor as soon as possible. Check the nearby corona center ${coronaCenterLink}`;
   }
   return (
-      <div>
+      <div className="col-sm-8 offset-sm-1 form-container pd-top-bottom-30">
         {/* You prefer <strong>{props.quizResult}</strong>! */}
         <h3>Assessment Result</h3>
         <h2>Your CQ(covid Quotient) is xx%</h2>
         <p>According to Assessment and contact Tracing(ACT) your current risk for having corona virus is: {risk}</p>
         <section>
-          <Alert key="1" variant="success">Low</Alert>
-          <Alert key="1" variant="warning"> Medium</Alert>
+          <Alert key="1" variant="secondary">Low</Alert>
+          <Alert key="1" variant="secondary"> Medium</Alert>
           <Alert key="1" variant="danger"> High</Alert>
         </section>
         <p dangerouslySetInnerHTML={{__html: RecommendationText}}></p>
-        {/* <section>
-          <strong>Recommendations</strong>
-          <p>Follow Social distancing measures.</p>
-          <p>Follow personal and respiratory hygiene.</p>
-          <p>Be watchful for any symptoms like fever, dry cough, sore throat, shortness of breath and re-take this test.</p>
-          <p>Avoid touching your face, eyes, and mouth</p>
-          <p>Eat Healthy and maintain adequate Immunity</p>
-        </section>
-        <section>
-          <strong>Nearby Laboratory</strong>
-          <address>
-            <strong>Example Inc.</strong><br/>
-            1234 Example Street<br/>
-            India, Example 0987<br/>
-            <abbr title="Phone">P:</abbr> (123) 456-7890
-          </address>
-          <address>
-            <strong>Example Inc.</strong><br/>
-            1234 Example Street<br/>
-            India, Example 0987<br/>
-            <abbr title="Phone">P:</abbr> (123) 456-7890
-          </address>
-        </section> */}
       </div>
   );
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function Question(props) {
-  return <p className="question">{props.content}</p>;
+  return <strong className="question">{props.content}</strong>;
 }
 
 Question.propTypes = {

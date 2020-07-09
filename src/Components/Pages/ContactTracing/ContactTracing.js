@@ -26,7 +26,7 @@ class ContactTracing extends Component {
                 <h3>Contact Tracing</h3>
                 
                 <button onClick={this.add}>Add</button>
-                <Form onSubmit={props.submitContactTracing} noValidate>                                            
+                <Form onSubmit={this.submitContactTracing} noValidate>                                            
                     {
                         this.state.contacts.map((country, indx) => {
                             return (

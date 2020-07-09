@@ -20,10 +20,11 @@ function Quiz(props) {
   }
 
   return (
-    <div key={props.questionId}>
+    <div key={props.questionId} className="col-sm-8 offset-sm-1 form-container pd-top-bottom-30">
       <br></br>
       { props.question ? <QuestionCount counter={props.questionId} total={props.questionTotal} /> : "" }
       <Question content={props.question} />
+      <br></br>
       <ul className="answerOptions">
         {props.answerOptions.map(renderAnswerOptions)}
       </ul>

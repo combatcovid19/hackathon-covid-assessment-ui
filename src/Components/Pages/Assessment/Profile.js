@@ -66,7 +66,7 @@ function Profile(props) {
           <Form.Group as={Col} md="6">
             <Form.Row>
             <Form.Label as="legend" column sm={2}>
-              Gender<span>*</span>
+              Gender
             </Form.Label>
             <Col sm={10} name="gender" onChange={props.profileFormHandler} className="flex-space-evenly-horizontal mr-top-10">
               <Form.Check
@@ -156,7 +156,6 @@ function Profile(props) {
         </Form.Row>
         <Form.Row>
           <Form.Group as={Col} md="6">
-            <Form.Label>State<span>*</span></Form.Label>
             <Form.Control as="select" name="state" value={f.state} onChange={props.profileFormHandler} noValidate>
               <StateList data={f.statesList}/>
             </Form.Control>
@@ -164,7 +163,6 @@ function Profile(props) {
                 <span className='error'>{props.errors.state}</span>}
           </Form.Group>
           {f.country === "India" ? <Form.Group as={Col} md="6">
-            <Form.Label>District</Form.Label>
             <Form.Control
               type="text"
               placeholder="district"
@@ -174,7 +172,6 @@ function Profile(props) {
             />
           </Form.Group> :
           <Form.Group as={Col} md="6">
-            <Form.Label>County</Form.Label>
             <Form.Control
               type="text"
               placeholder="county"
@@ -186,7 +183,6 @@ function Profile(props) {
         </Form.Row>
         <Form.Row>
           <Form.Group as={Col} md="6">
-            <Form.Label>City<span>*</span></Form.Label>
             <Form.Control
               type="text"
               placeholder="city"
@@ -198,7 +194,6 @@ function Profile(props) {
               <span className='error'>{props.errors.city}</span>}
           </Form.Group>
           <Form.Group as={Col} md="6">
-            <Form.Label>Street<span>*</span></Form.Label>
             <Form.Control
               type="text"
               placeholder="street"
@@ -212,7 +207,6 @@ function Profile(props) {
         </Form.Row>
         <Form.Row>
           <Form.Group as={Col} md="6">
-            <Form.Label>Zip Code<span>*</span></Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter ZipCode"

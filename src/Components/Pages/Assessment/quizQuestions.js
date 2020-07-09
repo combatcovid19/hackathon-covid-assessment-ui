@@ -2,119 +2,134 @@ var quizQuestions = {
     default: [],
       India: [
         {
-            question: "Are o experiencing an of the following symptoms?",
+            question: "Do you have severe symptoms, such as feeling very ill, noticeably short of breath, chest pain, light-headedness or any other worrisome symptoms for which you would typically seek immediate medical attention at an urgent care or emergency room?",
             answers: [
                 {
-                    type: "Cough",
-                    content: "Cough"
-                },
-                {
-                    type: "Fever",
-                    content: "Fever"
-                },
-                {
-                    type: "Difficulity in Breathing",
-                    content: "Difficulity in Breathing"
-                },
-                {
-                    type: "None of Above",
-                    content: "None of Above"
-                }
-            ]
-        },
-        {
-            question: "Have you ever had any of the following:",
-            answers: [
-                {
-                    type: "Diabetes",
-                    content: "Diabetes"
-                },
-                {
-                    type: "Hypertension",
-                    content: "Hypertension"
-                },
-                {
-                    type: "Lung Disease",
-                    content: "Lung Disease"
-                },
-                {
-                    type: "None of Above",
-                    content: "None of Above"
-                }
-            ]
-        },
-        {
-            question: "Have you traveled anywhere internationally in the last 20-45 days?:",
-            answers: [
-                {
-                    type: "traveled",
+                    type: "Yes",
                     content: "Yes"
                 },
                 {
-                    type: "notTraveled",
+                    type: "No",
                     content: "No"
                 }
             ]
         },
         {
-            question: "Are you having running nose?",
+            question: "Are you above 60 Years old?",
             answers: [
                 {
-                    type: "Microsoft",
-                    content: "Halo",
-                    fieldType: "radio"
+                    type: "Yes",
+                    content: "Yes"
                 },
                 {
-                    type: "Nintendo",
-                    content: "Pokemon",
-                    fieldType: "radio"
+                    type: "No",
+                    content: "No"
+                }
+            ]
+        },
+        {
+            question: "Have you been in contact with someone diagnosed with COVID-19 either within 2 days before their symptoms started, while they had symptoms, within 10 days after their symptoms began, or within 3 days after their symptoms ended?",
+            answers: [
+                {
+                    type: "Yes",
+                    content: "Yes"
                 },
                 {
-                    type: "Sony",
-                    content: "Uncharted",
-                    fieldType: "radio"
+                    type: "No",
+                    content: "No"
+                }
+            ]
+        },
+        {
+            question: "Do you currently have any of the following symptoms that may be due to COVID-19, particularly a cough, feeling feverish, chills, muscle aches, headache, difficulty breathing, and/or fatigue as well as in some cases, diarrhea, sore throat, runny nose, or loss of taste or smell?",
+            answers: [
+                {
+                    type: "Yes",
+                    content: "Yes"
+                },
+                {
+                    type: "No",
+                    content: "No"
+                }
+            ]
+        },
+        {
+            question: "Are you from or have you been in areas with a Coronavirus outbreak (a lot of cases) in the past 14 days? And/or have you traveled internationally in the past 14 days?",
+            answers: [
+                {
+                    type: "Yes",
+                    content: "Yes"
+                },
+                {
+                    type: "No",
+                    content: "No"
                 }
             ]
         }
       ],
       USA: [
         {
-            question: "USA 1st Question",
+            question: "Do you have severe symptoms, such as feeling very ill, noticeably short of breath, chest pain, light-headedness or any other worrisome symptoms for which you would typically seek immediate medical attention at an urgent care or emergency room?",
             answers: [
                 {
-                    type: "Microsoft",
-                    content: "Halo",
-                    fieldType: "radio"
+                    type: "Yes",
+                    content: "Yes"
                 },
                 {
-                    type: "Nintendo",
-                    content: "Pokemon",
-                    fieldType: "radio"
-                },
-                {
-                    type: "Sony",
-                    content: "Uncharted",
-                    fieldType: "radio"
+                    type: "No",
+                    content: "No"
                 }
             ]
         },
         {
-            question: "USA 2nd Question",
+            question: "Are you above 60 Years old?",
             answers: [
                 {
-                    type: "Microsoft",
-                    content: "Halo",
-                    fieldType: "radio"
+                    type: "Yes",
+                    content: "Yes"
                 },
                 {
-                    type: "Nintendo",
-                    content: "Pokemon",
-                    fieldType: "radio"
+                    type: "No",
+                    content: "No"
+                }
+            ]
+        },
+        {
+            question: "Have you been in contact with someone diagnosed with COVID-19 either within 2 days before their symptoms started, while they had symptoms, within 10 days after their symptoms began, or within 3 days after their symptoms ended?",
+            answers: [
+                {
+                    type: "Yes",
+                    content: "Yes"
                 },
                 {
-                    type: "Sony",
-                    content: "Uncharted",
-                    fieldType: "radio"
+                    type: "No",
+                    content: "No"
+                }
+            ]
+        },
+        {
+            question: "Do you currently have any of the following symptoms that may be due to COVID-19, particularly a cough, feeling feverish, chills, muscle aches, headache, difficulty breathing, and/or fatigue as well as in some cases, diarrhea, sore throat, runny nose, or loss of taste or smell?",
+            answers: [
+                {
+                    type: "Yes",
+                    content: "Yes"
+                },
+                {
+                    type: "No",
+                    content: "No"
+                }
+            ]
+        },
+        {
+            question: "Are you from or have you been in areas with a Coronavirus outbreak (a lot of cases) in the past 14 days? And/or have you traveled internationally in the past 14 days?",
+            answers: [
+                {
+                    type: "Yes",
+                    content: "Yes"
+                },
+                {
+                    type: "No",
+                    content: "No"
                 }
             ]
         }
@@ -122,42 +137,67 @@ var quizQuestions = {
       ],
       Canada: [
         {
-            question: "Canada 1st Question",
+            question: "Do you have severe symptoms, such as feeling very ill, noticeably short of breath, chest pain, light-headedness or any other worrisome symptoms for which you would typically seek immediate medical attention at an urgent care or emergency room?",
             answers: [
                 {
-                    type: "Microsoft",
-                    content: "Halo",
-                    fieldType: "radio"
+                    type: "Yes",
+                    content: "Yes"
                 },
                 {
-                    type: "Nintendo",
-                    content: "Pokemon",
-                    fieldType: "radio"
-                },
-                {
-                    type: "Sony",
-                    content: "Uncharted",
-                    fieldType: "radio"
+                    type: "No",
+                    content: "No"
                 }
             ]
         },
         {
-            question: "Canada 2nd Question",
+            question: "Are you above 60 Years old?",
             answers: [
                 {
-                    type: "Microsoft",
-                    content: "Halo",
-                    fieldType: "radio"
+                    type: "Yes",
+                    content: "Yes"
                 },
                 {
-                    type: "Nintendo",
-                    content: "Pokemon",
-                    fieldType: "radio"
+                    type: "No",
+                    content: "No"
+                }
+            ]
+        },
+        {
+            question: "Have you been in contact with someone diagnosed with COVID-19 either within 2 days before their symptoms started, while they had symptoms, within 10 days after their symptoms began, or within 3 days after their symptoms ended?",
+            answers: [
+                {
+                    type: "Yes",
+                    content: "Yes"
                 },
                 {
-                    type: "Sony",
-                    content: "Uncharted",
-                    fieldType: "radio"
+                    type: "No",
+                    content: "No"
+                }
+            ]
+        },
+        {
+            question: "Do you currently have any of the following symptoms that may be due to COVID-19, particularly a cough, feeling feverish, chills, muscle aches, headache, difficulty breathing, and/or fatigue as well as in some cases, diarrhea, sore throat, runny nose, or loss of taste or smell?",
+            answers: [
+                {
+                    type: "Yes",
+                    content: "Yes"
+                },
+                {
+                    type: "No",
+                    content: "No"
+                }
+            ]
+        },
+        {
+            question: "Are you from or have you been in areas with a Coronavirus outbreak (a lot of cases) in the past 14 days? And/or have you traveled internationally in the past 14 days?",
+            answers: [
+                {
+                    type: "Yes",
+                    content: "Yes"
+                },
+                {
+                    type: "No",
+                    content: "No"
                 }
             ]
         }
