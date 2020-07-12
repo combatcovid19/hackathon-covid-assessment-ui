@@ -57,7 +57,7 @@ function Profile(props) {
               <span className='error'>{props.errors.dob}</span>}
           </Form.Group>
           <Form.Group as={Col} sm="3" className="flex-v-align-center">
-            <Form.Label>AGE:  <strong>{f.age}</strong></Form.Label>
+            <Form.Label><strong>AGE:</strong>  {f.age}</Form.Label>
             
           </Form.Group>
           </Form.Row>
@@ -66,7 +66,7 @@ function Profile(props) {
           <Form.Group as={Col} md="6">
             <Form.Row>
             <Form.Label as="legend" column sm={2}>
-              Gender
+              <strong>Gender</strong>
             </Form.Label>
             <Col sm={10} name="gender" onChange={props.profileFormHandler} className="flex-space-evenly-horizontal mr-top-10">
               <Form.Check
@@ -217,7 +217,8 @@ function Profile(props) {
             {props.errors.zipCode.length > 0 && 
               <span className='error'>{props.errors.zipCode}</span>}
           </Form.Group>
-        </Form.Row>
+        </Form.Row><hr/>
+
         <Button className="float-right" type="submit">Start Assessment</Button>
     </Form>
     </div>

@@ -248,10 +248,10 @@ class Assessment extends Component {
 
   render() {
     return (
-      <div className="row assement-page">
-        <div class="col-sm-10 offset-sm-1">
+      <div className="row assement-page mb-5">
+        <div className="col-sm-10 offset-sm-1">
           <div className="caption flex-space-between">
-            <div>{this.state.title}</div>
+            <p className="formTitle">{this.state.title}</p>
           </div>
         </div>
         {this.state.isProfileShow ? this.renderProfileForm() : ""}

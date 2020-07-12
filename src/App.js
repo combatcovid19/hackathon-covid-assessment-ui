@@ -3,7 +3,6 @@ import { Switch, Route } from "react-router-dom";
 import './App.scss';
 import { BrowserRouter as Router } from "react-router-dom";
 
-import InnerHeader from "./Components/organisms/InnerHeader/InnerHeader.js";
 import Assessment from "./Components/Pages/Assessment/Assessment.js";
 import Providers from "./Components/Pages/Providers/Providers.js";
 import ContactTracing from "./Components/Pages/ContactTracing/ContactTracing.js";
@@ -25,7 +24,6 @@ function App() {
           <NavRoute exact component={ContactTracing} exact path="/tracing" />
         </Switch>
       </Router>
-      {/* <Footer/> */}
     </div>
   );
 }
