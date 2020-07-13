@@ -18,9 +18,9 @@ function Result(props) {
   return (
       <div className="col-sm-8 offset-sm-1 form-container pd-top-bottom-30">
         {/* You prefer <strong>{props.quizResult}</strong>! */}
-        <h3>Assessment Result</h3>
-        <h2>Your CQ(covid Quotient) is xx%</h2>
-        <p>According to Assessment and contact Tracing(ACT) your current risk for having corona virus is: {risk}</p>
+        <strong className="mt-2 mb-3">Assessment Result</strong>
+        <p className="mt-2 mb-3">Your CQ(covid Quotient) is xx%</p>
+        <p className="mt-2 mb-3">According to Assessment and contact Tracing(ACT) your current risk for having corona virus is: {risk}</p>
         <section>
           <Alert key="1" variant="secondary">Low</Alert>
           <Alert key="1" variant="secondary"> Medium</Alert>

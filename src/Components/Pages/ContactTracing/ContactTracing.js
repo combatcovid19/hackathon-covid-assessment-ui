@@ -1,22 +1,30 @@
 import React, { Component } from 'react';
-import { Form, Button, Col } from 'react-bootstrap';
+import { Form, Button, Col, ListGroup } from 'react-bootstrap';
 
 class ContactTracing extends Component {
     constructor(props) {
         super(props);
         this.state = {
             contacts: [{name: "", email: ""}],
-            name: "",
-            email: "",
             description: "We have met a few times, I have Covid symptoms, recommending you to go through assessment"
         }
     }
     add = () => {
-        this.setState({contacts: [...this.state.contacts, ""]})
+        this.setState({contacts: [...this.state.contacts, { name: "", email: "" }]})
     }
-    tracingFormHandler = (e) => {
-
+    remove = (e, indx) => {
+        e.preventDefault();
+        const contacts = this.state.contacts;
+        contacts.splice(indx, 1);
+        this.setState({contacts})
     }
+    // handle input change
+    handleInputChange = (e, index) => {
+        const { name, value } = e.target;
+        const contacts = [...this.state.contacts];
+        contacts[index][name] = value;
+        this.setState({contacts})
+    };
     submitContactTracing = (e) => {
         
     }
@@ -40,9 +48,9 @@ class ContactTracing extends Component {
                                             <Form.Control
                                                 type="text"
                                                 name="name"
-                                                value={this.state.name}
+                                                value={country.name}
                                                 placeholder="name"
-                                                onChange={this.tracingFormHandler}
+                                                onChange={e => this.handleInputChange(e, indx)}
                                             />
                                         </Form.Group>
                                         <Form.Group as={Col} md="4">
@@ -50,11 +58,16 @@ class ContactTracing extends Component {
                                             <Form.Control
                                                 type="text"
                                                 name="email"
-                                                value={this.state.email}
+                                                value={country.email}
                                                 placeholder="Email"
-                                                onChange={this.tracingFormHandler}
+                                                onChange={e => this.handleInputChange(e, indx)}
                                             />
-                                        </Form.Group>  
+                                        </Form.Group> 
+                                        <div className="btn-box">
+                                            {this.state.contacts.length !== 1 && <button
+                                            className="mr10 mt-4"
+                                            onClick={(e) => this.remove(e, indx)}>X</button>}
+                                        </div> 
                                     </Form.Row>                                  
 
                                 )
@@ -73,7 +86,7 @@ class ContactTracing extends Component {
                                 />
                             </Form.Group>
                         </Form.Row>
-                        <Button className="float-right" type="submit">Submit</Button>
+                        <Button className="float-right mb-4" type="submit">Submit</Button>
                     </Form>
                 
                 </div>
