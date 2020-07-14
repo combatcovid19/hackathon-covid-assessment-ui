@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Form, Button, Col, ListGroup } from 'react-bootstrap';
+import { Form, Button, Col, Row } from 'react-bootstrap';
+import { SocialIcon } from 'react-social-icons';
 
 class ContactTracing extends Component {
     constructor(props) {
@@ -36,7 +37,19 @@ class ContactTracing extends Component {
                     <div className="caption flex-space-between">
                         <div className="formTitle">Contact Tracing</div>
                     </div>
-                    <br></br>
+                    <Row>
+                        <Col><p className="mt-2 mb-3">Contact Tracing through Social Media.</p></Col>
+                    </Row>
+                    <Row>
+                        <Col><SocialIcon network="facebook" target="_blank" url="http://facebook.com/"/></Col>
+                        <Col><SocialIcon network="instagram" target="_blank" url="http://instagram.com/"/></Col>
+                        <Col><SocialIcon network="twitter" target="_blank" url="http://twitter.com/"/></Col>
+                        <Col><SocialIcon network="linkedin" target="_blank" url="http://linkedin.com/"/></Col>
+                    </Row>
+                    
+                    <Row>
+                        <Col><p className="mt-3 mb-3">(OR) Contact Tracing through Email.</p></Col>
+                    </Row>
                     <button className ="pull-right" onClick={this.add}>Add</button>
                     <Form onSubmit={this.submitContactTracing} noValidate>                                            
                         {
