@@ -27,10 +27,10 @@ function Result(props) {
           <Alert key="1" variant="danger"> High</Alert>
         </section>
         {/* <p dangerouslySetInnerHTML={{__html: RecommendationText}}></p> */}
-        <p>The ACT recommends follow the guidelines in the</p>
-        <button type="button" href="/guidelines" class="btn btn-link">Link</button>
-        <p> provided and talk to doctor as soon as possible. Check the nearby corona center</p>
-        <Link to="/provider">Here</Link>
+        <p>The ACT recommends follow the guidelines in the provided <button type="button" href="/guidelines" className="btn btn-link">Link</button></p>
+        
+        <p>And talk to doctor as soon as possible. Check the nearby corona center <Link to="/provider">Here</Link></p>
+        
       </div>
   );
 }

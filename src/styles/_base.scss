@@ -1,8 +1,16 @@
+body, html, #root {
+  height: 100%;
+}
+
+#inner-content {
+  height: 100%;
+}
+
 body {
   font-family: "Poppins";
   color: #424242;
   // text-transform: uppercase;
-  background: transparent linear-gradient(173deg, #32A1E6 0%, #4100BA 20%, #6F0094 40%, #400052 65%, #2A0031 100%) 0% 0% no-repeat padding-box !important;
+
   font-size: 16px;
 
   .container-fluid {
@@ -51,12 +59,12 @@ body {
     border-radius: 40px;
     height: 8px;
     width: 138px;
-    top: 52px;
+    top: 60px;
 
   }
 
   input {
-    height: 44px;
+    height:36px !important;
     background: #FFFFFF;
     border: 1px solid #E6E4E4;
   }
@@ -68,7 +76,7 @@ body {
   h1 {
     font-size: 41px;
 
-    padding: 30px 0;
+    padding: 22px 0;
   }
 
   h2 {
@@ -87,9 +95,10 @@ body {
     background: #fff;
     border-radius: 14px;
     border: 0px solid;
+    padding:15px;
 
     .caption {
-      padding: 20px 0px;
+      padding: 20px 0px 20px;
       border-bottom: 2px solid #b2b2b2;
     }
   }
@@ -100,16 +109,19 @@ body {
     color: #3D3BC8;
   }
 }
+
 .error {
   color: #db2269;
   font-size: 0.625em;
   display: relative;
 }
+
 .alert-danger {
-    color: #ffffff;
-    background-color: #721c24;
-    border-color: #f5c6cb;
+  color: #ffffff;
+  background-color: #721c24;
+  border-color: #f5c6cb;
 }
+
 .flex-space-between {
   display: flex;
   justify-content: space-between;
@@ -157,7 +169,10 @@ body {
   input:not([type="number"]):not([type="radio"]),
   select {
     border-radius: 120px;
-    border: 1px solid #E6E4E4;
+    border: 1px solid #E6E4E4;
+    padding: 0 15px;
+    font-size: 14px;
+    height: 36px;
   }
 
   input {
@@ -176,13 +191,15 @@ body {
 
   .form-check {
     input {
-      height: auto;
+      height: auto !important;
     }
 
     label {
       font-size: 14px;
       text-transform: capitalize;
       font-weight: normal;
+      float: left;
+      line-height: 14px;
     }
   }
 
@@ -195,4 +212,38 @@ body {
       border: 1px solid #b2b2b2;
     }
   }
+}
+
+.questionCount {
+  padding: 20px 0 15px;
+}
+
+.answerOptions {
+  padding: 0;
+
+  li {
+    padding: 10px 0;
+    float: left;
+    width: 60px;
+  }
+}
+
+button.btn-primary {
+  padding: 12px 30px !important;
+  border-radius: 30px !important;
+  background: transparent linear-gradient(270deg, #AE00CE 0%, var(--unnamed-color-e50d6c) 100%) 0% 0% no-repeat padding-box;
+  background: transparent linear-gradient(270deg, #AE00CE 0%, #E50D6C 100%) 0% 0% no-repeat padding-box;
+  border: 0 !important;
+
+  &:focus {
+    outline: 0 !important;
+  }
+}
+
+.error {
+  color: #db2269;
+  font-size: 10px;
+  position: absolute;
+  left: 20px;
+  bottom: -15px;
 }

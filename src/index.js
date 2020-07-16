@@ -12,25 +12,23 @@ import {Row, Col} from "react-bootstrap";
 
 
 ReactDOM.render(
-    <Provider stores={stores}>
-
-        <Container fluid>
-            <Header/>
-            <Container>
-                <Row className="banner-text">
-                    <Col>
-                        <h2>COVID-19 ASSESSMENT</h2>
-                        <h4>This is a COVID-19 symptoms assessment form.</h4>
-                        <h4>Provide the required information for self assessment related to COVID-19.</h4>
-                    </Col>
-                </Row>
-                <App/>
-                <Row>
-                    <Footer/>
-                </Row>
-            </Container>
-        </Container>
-    </Provider>,
-    document.getElementById('root')
+  <Provider stores={stores}>
+    <Header/>
+    <div className="wrapper">
+      <Container>
+        <Row className="banner-text">
+          <Col>
+            <h2>COVID-19 ASSESSMENT</h2>
+            <h4>This is a COVID-19 symptoms assessment form.</h4>
+            <h4>Provide the required information for self assessment related to COVID-19.</h4>
+          </Col>
+        </Row>
+        <App/>
+      </Container>
+      <div className="push"></div>
+    </div>
+    <Footer/>
+  </Provider>,
+  document.getElementById('root')
 );
 serviceWorker.unregister();

@@ -1,6 +1,18 @@
 footer {
-    text-align: center;
-    padding: 15px;
-    background-color: #3a48ce;
-    color: white;
+  text-align: center;
+  padding: 26px;
+  background-color: #3a48ce;
+  color: white;
+  float: left;
+  width: 100%;
   }
+.wrapper {
+  min-height: 100%;
+  margin-bottom: -70px;
+  background: transparent linear-gradient(173deg, #32A1E6 0%, #4100BA 20%, #6F0094 40%, #400052 65%, #2A0031 100%) no-repeat !important;
+
+}
+footer,
+.push {
+  height: 70px;
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from "react-router-dom";
 import './App.scss';
+import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter as Router } from "react-router-dom";
 
 import Assessment from "./Components/Pages/Assessment/Assessment.js";

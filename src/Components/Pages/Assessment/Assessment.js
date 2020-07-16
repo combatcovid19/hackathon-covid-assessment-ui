@@ -5,6 +5,8 @@ import Quiz from './Quiz';
 import Profile from './Profile';
 import Result from './Result';
 // import { axios } from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+
 import { validateForm, calculateAge, formValidation } from "../../../util/utilityFunction";
 
 class Assessment extends Component {
@@ -132,8 +134,9 @@ class Assessment extends Component {
     let profile = { ...this.state.profile };
     let errors = this.state.errors;
     formValidation(profile, errors);
-    // if (validateForm(this.state.errors)) {
+    if (validateForm(this.state.errors)) {
       console.info('Valid Form')
+      toast("Profile Save. Answer few Questions for Assessment.");
       const selectedCountry = profile.country;
       this.setState({
         question: quizQuestions[selectedCountry][0].question,
@@ -144,13 +147,14 @@ class Assessment extends Component {
         isProfileShow: false,
         title: "Questionaries"
       });
-    // } else {
-    //   console.error('Invalid Form', this.state.errors)
-    //   this.setState({
-    //     profile,
-    //     errors
-    //   });
-    // }
+    } else {
+      console.error('Invalid Form', this.state.errors);
+      toast("Please enter all required fields.");
+      this.setState({
+        profile,
+        errors
+      });
+    }
 
     setTimeout(() => console.log("#1submit call", this.state), 300);
   }
@@ -249,6 +253,7 @@ class Assessment extends Component {
   render() {
     return (
       <div className="row assement-page mb-5">
+        <ToastContainer />
         <div className="col-sm-10 offset-sm-1">
           <div className="caption flex-space-between">
             <p className="formTitle">{this.state.title}</p>

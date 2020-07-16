@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import {Row, Col} from "react-bootstrap";
+import './style.css'
 class Providers extends Component {
     constructor(props) {
         super(props);
