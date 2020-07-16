@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Form, Button, Col, Row} from 'react-bootstrap';
 import {SocialIcon} from 'react-social-icons';
 import { ToastContainer, toast } from 'react-toastify';
-
 class ContactTracing extends Component {
   constructor(props) {
     super(props);
@@ -37,7 +36,7 @@ class ContactTracing extends Component {
     return (
       <div className="row assement-page mb-5">
         <ToastContainer/>
-        <div className="col-sm-10 offset-sm-1">
+        <div class="col-sm-10 offset-sm-1">
           <div className="caption flex-space-between">
             <div className="formTitle">Contact Tracing</div>
           </div>
@@ -45,10 +44,12 @@ class ContactTracing extends Component {
             <Col><p className="mt-2 mb-3">Contact Tracing through Social Media.</p></Col>
           </Row>
           <Row>
-            <Col><SocialIcon network="facebook" target="_blank" url="http://facebook.com/"/></Col>
-            <Col><SocialIcon network="instagram" target="_blank" url="http://instagram.com/"/></Col>
-            <Col><SocialIcon network="twitter" target="_blank" url="http://twitter.com/"/></Col>
-            <Col><SocialIcon network="linkedin" target="_blank" url="http://linkedin.com/"/></Col>
+            <Col>
+              <SocialIcon network="facebook" target="_blank" url="http://facebook.com/"/>
+              <SocialIcon network="instagram" target="_blank" url="http://instagram.com/"/>
+              <SocialIcon network="twitter" target="_blank" url="http://twitter.com/"/>
+              <SocialIcon network="linkedin" target="_blank" url="http://linkedin.com/"/>
+            </Col>
           </Row>
 
           <Row>
@@ -82,9 +83,9 @@ class ContactTracing extends Component {
                     </Form.Group>
                     <Form.Group as={Col} md="4">
                       {this.state.contacts.length !== 1 && <Button
-                        className="mr-2 mt-3 float-left "
+                        className="mr-2 mt-4 float-left smallBtn"
                         onClick={(e) => this.remove(e, indx)}>X</Button>}
-                      <Button className="pull-left mt-3" onClick={this.add}>Add</Button>
+                      <Button className="pull-left mt-4 smallBtn" onClick={this.add}>Add</Button>
                     </Form.Group>
                   </Form.Row>
 

@@ -6,7 +6,6 @@ import Profile from './Profile';
 import Result from './Result';
 // import { axios } from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-
 import { validateForm, calculateAge, formValidation } from "../../../util/utilityFunction";
 
 class Assessment extends Component {
@@ -148,8 +147,8 @@ class Assessment extends Component {
         title: "Questionaries"
       });
     } else {
-      console.error('Invalid Form', this.state.errors);
-      toast("Please enter all required fields.");
+      console.error('Invalid Form', this.state.errors)
+        toast("Please enter all required fields.");
       this.setState({
         profile,
         errors

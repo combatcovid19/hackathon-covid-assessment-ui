@@ -7,7 +7,7 @@ class Header extends React.Component {
                 <h1 className="offset-md-1 float-left">
                     ACT COVID-19
                 </h1>
-                <img className="float-right" src={logo}/>
+                <img className="float-right logo" src={logo}/>
             </header>
         )
     }

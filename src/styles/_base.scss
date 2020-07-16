@@ -63,20 +63,24 @@ body {
 
   }
 
+  .logo{
+    padding: 18px 15px;
+  }
   input {
     height:36px !important;
     background: #FFFFFF;
     border: 1px solid #E6E4E4;
   }
-
+  .col-form-label{
+    padding-top: 0 !important;
+  }
   h1, h2, h3, h4, h5 {
     color: #fff;
   }
 
   h1 {
     font-size: 41px;
-
-    padding: 22px 0;
+    padding: 10px 0;
   }
 
   h2 {
@@ -169,7 +173,7 @@ body {
   input:not([type="number"]):not([type="radio"]),
   select {
     border-radius: 120px;
-    border: 1px solid #E6E4E4;
+    border: 1px solid #E6E4E4;
     padding: 0 15px;
     font-size: 14px;
     height: 36px;
@@ -213,7 +217,30 @@ body {
     }
   }
 }
-
+a{
+  color:#db2269 !important;
+}
+.f14{
+  font-size: 14px !important;
+}
+.textWhite{
+  color: #ffffff !important;
+}
+.alert-primary{
+  background:green;
+}
+.alert-secondary{
+  background:orange;
+}
+.alert-danger{
+  background: red;
+}
+.textHighLight{
+  color:#db2269;
+}
+.form-control:focus{
+  box-shadow: 0 0 0 0.2rem rgba(111, 0, 148, 0.4) !important;
+}
 .questionCount {
   padding: 20px 0 15px;
 }
@@ -228,6 +255,11 @@ body {
   }
 }
 
+.social-icon{
+  width: 30px !important;
+  height: 30px !important;
+  margin-right: 10px;
+}
 button.btn-primary {
   padding: 12px 30px !important;
   border-radius: 30px !important;
@@ -240,6 +272,11 @@ button.btn-primary {
   }
 }
 
+button.btn-primary.smallBtn{
+  padding: 6px 20px !important;
+  margin-top: 5px;
+  float: left;
+}
 .error {
   color: #db2269;
   font-size: 10px;

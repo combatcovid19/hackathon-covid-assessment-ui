@@ -56,7 +56,7 @@ function Profile(props) {
                 {props.errors.dob.length > 0 &&
                 <span className='error'>{props.errors.dob}</span>}
               </Form.Group>
-              <Form.Group as={Col} sm="3" className="flex-v-align-center">
+              <Form.Group as={Col} sm="3" className="mt-2">
                 <Form.Label><strong>AGE:</strong> {f.age}</Form.Label>
 
               </Form.Group>
@@ -64,12 +64,12 @@ function Profile(props) {
 
           </Form.Group>
           <Form.Group as={Col} md="6">
-            <Form.Row>
+            <Form.Row className="mt-2">
               <Form.Label as="legend" column sm={2}>
                 <strong>Gender</strong>
               </Form.Label>
               <Col sm={10} name="gender" onChange={props.profileFormHandler}
-                   className="flex-space-evenly-horizontal mr-top-10">
+                   className="flex-space-evenly-horizontal mt-1">
                 <Form.Check
                   type="radio"
                   label="Male"
@@ -112,6 +112,13 @@ function Profile(props) {
               value={f.mobile}
               onChange={props.mobileHandler}
             />
+            {/* <Form.Control
+                type="tel"
+                name="mobile"
+                value={f.mobile}
+                onChange={props.profileFormHandler}
+                placeholder="Enter Mobile"                  
+              /> */}
             {props.errors.mobile.length > 0 &&
             <span className='error'>{props.errors.mobile}</span>}
           </Form.Group>
@@ -124,6 +131,13 @@ function Profile(props) {
               value={f.whatsAppNumber}
               onChange={props.whatsappHandler}
             />
+            {/* <Form.Control
+                type="tel"
+                name="whatsAppNumber"
+                value={f.whatsAppNumber}
+                onChange={props.profileFormHandler}
+                placeholder="Enter WhatsApp Number"                  
+              /> */}
             {props.errors.whatsAppNumber.length > 0 &&
             <span className='error'>{props.errors.whatsAppNumber}</span>}
           </Form.Group>
