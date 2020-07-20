@@ -4,7 +4,7 @@ import states from './states';
 import Quiz from './Quiz';
 import Profile from './Profile';
 import Result from './Result';
-// import { axios } from 'axios';
+import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import { validateForm, calculateAge, formValidation } from "../../../util/utilityFunction";
 
@@ -33,6 +33,7 @@ class Assessment extends Component {
         whatsAppNumber: "",
         country: "default",
         state: "",
+        countryList: [],
         statesList: [],
         district: "",
         county: "",
@@ -58,27 +59,31 @@ class Assessment extends Component {
     this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
   }
 
-  // componentDidMount() {
-  //   axios.all([
-  //     axios.get('/country'),
-  //     axios.get('/gender')
-  //   ])
-  //   .then(response => {
-  //     console.log('Country List: ', response[0]);
-  //     console.log('Gender List: ', response[1]);
-  //   });
-  // }
+  componentDidMount() {
+    let profile = { ...this.state.profile };
+    axios.get('http://localhost:19609/assessment/countries')
+      .then((response) => {
+        profile.countryList = response.data;
+        this.setState({
+          profile
+        });
+      });
+      
+  }
 
   // country select action.
   handleCountryChange = (event) => {
     let profile = { ...this.state.profile };
     profile.country = event.target.value;
-    if (profile.country) {
-      profile.statesList = states[profile.country];
-      this.setState({
-        profile
+    let country = event.target.value;
+    let url = `http://localhost:19609/assessment/${country}/states/`;
+    axios.get(url)
+      .then((response) => {
+        profile.statesList = response.data;
+        this.setState({
+          profile
+        });
       });
-    }
 
     setTimeout(() => console.log("#1###", profile.statesList), 300);
   }
@@ -259,7 +264,8 @@ class Assessment extends Component {
           </div>
         </div>
         {this.state.isProfileShow ? this.renderProfileForm() : ""}
-        {this.state.result ? this.renderResult() : this.renderQuiz()}
+        {(!this.state.isProfileShow && !this.state.result) ? this.renderQuiz() : ""}
+        {this.state.result ? this.renderResult() : ""}
       </div>
     );
   }

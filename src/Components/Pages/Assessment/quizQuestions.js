@@ -1,6 +1,6 @@
 var quizQuestions = {
     default: [],
-      India: [
+      IND: [
         {
             question: "Do you have severe symptoms, such as feeling very ill, noticeably short of breath, chest pain, light-headedness or any other worrisome symptoms for which you would typically seek immediate medical attention at an urgent care or emergency room?",
             answers: [

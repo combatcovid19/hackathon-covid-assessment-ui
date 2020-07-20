@@ -5,8 +5,8 @@ function StateList(props) {
   return (
     <>
         <option selected>Select State</option>
-        { props.data.map(function(item) {
-            return <option key={item.id} value={item.id}>{item.state}</option>
+        { props.states.map(function(state) {
+            return <option key={state.stateCode} value={state.stateCode}>{state.stateName}</option>
           })
         }
         </>

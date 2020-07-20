@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import DatePicker from 'react-date-picker';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
+import CountryList from "./CountryList";
 import StateList from "./StateList";
 import {Form, Button, Col,} from 'react-bootstrap';
 
@@ -143,17 +144,14 @@ function Profile(props) {
           </Form.Group>
           <Form.Group as={Col} md="6" controlId="formGridState">
             <Form.Control as="select" name="country" value={f.country} onChange={props.handleCountryChange} noValidate>
-              <option selected value="">Select Country</option>
-              <option value="India">India</option>
-              <option value="USA">USA</option>
-              <option value="Canada">Canada</option>
+              <CountryList countries={f.countryList}/>
             </Form.Control>
             {props.errors.country.length > 0 &&
             <span className='error'>{props.errors.country}</span>}
           </Form.Group>
           <Form.Group as={Col} md="6">
             <Form.Control as="select" name="state" value={f.state} onChange={props.profileFormHandler} noValidate>
-              <StateList data={f.statesList}/>
+              <StateList states={f.statesList}/>
             </Form.Control>
             {props.errors.state.length > 0 &&
             <span className='error'>{props.errors.state}</span>}
