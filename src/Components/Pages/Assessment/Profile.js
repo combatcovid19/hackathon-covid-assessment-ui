@@ -75,21 +75,21 @@ function Profile(props) {
                   type="radio"
                   label="Male"
                   name="gender"
-                  value="male"
+                  value="MAL"
                   id="custom-inline-1"
                 />
                 <Form.Check
                   type="radio"
                   label="Female"
                   name="gender"
-                  value="female"
+                  value="FMAL"
                   id="custom-inline-2"
                 />
                 <Form.Check
                   type="radio"
                   label="Other"
                   name="gender"
-                  value="other"
+                  value="OTHER"
                   id="custom-inline-3"
                 />
               </Col>
@@ -113,13 +113,6 @@ function Profile(props) {
               value={f.mobile}
               onChange={props.mobileHandler}
             />
-            {/* <Form.Control
-                type="tel"
-                name="mobile"
-                value={f.mobile}
-                onChange={props.profileFormHandler}
-                placeholder="Enter Mobile"                  
-              /> */}
             {props.errors.mobile.length > 0 &&
             <span className='error'>{props.errors.mobile}</span>}
           </Form.Group>
@@ -132,13 +125,6 @@ function Profile(props) {
               value={f.whatsAppNumber}
               onChange={props.whatsappHandler}
             />
-            {/* <Form.Control
-                type="tel"
-                name="whatsAppNumber"
-                value={f.whatsAppNumber}
-                onChange={props.profileFormHandler}
-                placeholder="Enter WhatsApp Number"                  
-              /> */}
             {props.errors.whatsAppNumber.length > 0 &&
             <span className='error'>{props.errors.whatsAppNumber}</span>}
           </Form.Group>
@@ -156,12 +142,12 @@ function Profile(props) {
             {props.errors.state.length > 0 &&
             <span className='error'>{props.errors.state}</span>}
           </Form.Group>
-          {f.country === "India" ? <Form.Group as={Col} md="6">
+          {f.country === "IND" ? <Form.Group as={Col} md="6">
               <Form.Control
                 type="text"
                 placeholder="district"
-                name="district"
-                value={f.district}
+                name="districtOrCountyName"
+                value={f.districtOrCountyName}
                 onChange={props.profileFormHandler}
               />
             </Form.Group> :
@@ -169,8 +155,8 @@ function Profile(props) {
               <Form.Control
                 type="text"
                 placeholder="county"
-                name="county"
-                value={f.county}
+                name="districtOrCountyName"
+                value={f.districtOrCountyName}
                 onChange={props.profileFormHandler}
               />
             </Form.Group>}

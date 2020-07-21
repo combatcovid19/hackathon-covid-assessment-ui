@@ -6,7 +6,7 @@ import Profile from './Profile';
 import Result from './Result';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-import { validateForm, calculateAge, formValidation } from "../../../util/utilityFunction";
+import { validateForm, calculateAge, formValidation, profileRequestbinder } from "../../../util/utilityFunction";
 
 class Assessment extends Component {
   constructor(props) {
@@ -15,13 +15,15 @@ class Assessment extends Component {
     this.state = {
       title: "Profile Details",
       counter: 0,
-      questionId: 1,
+      questionCount: 1,
       question: '',
       answerOptions: [],
-      answer: '',
       answersCount: {},
-      result: '',
+      result: false,
       isProfileShow: true,
+      profileDetails: {},
+      assessmentQuestions: [],
+      usersAnswers: [],
       profile: {
         fname: "",
         lname: "",
@@ -35,8 +37,7 @@ class Assessment extends Component {
         state: "",
         countryList: [],
         statesList: [],
-        district: "",
-        county: "",
+        districtOrCountyName: "",
         city: "",
         street: "",
         zipCode: ""
@@ -136,21 +137,31 @@ class Assessment extends Component {
   submitProfileDetail = (e) => {
     e.preventDefault();
     let profile = { ...this.state.profile };
+    
+    let reqBody = profileRequestbinder(profile);
     let errors = this.state.errors;
     formValidation(profile, errors);
     if (validateForm(this.state.errors)) {
       console.info('Valid Form')
-      toast("Profile Save. Answer few Questions for Assessment.");
-      const selectedCountry = profile.country;
-      this.setState({
-        question: quizQuestions[selectedCountry][0].question,
-        answerOptions: quizQuestions[selectedCountry][0].answers,
-        counter: 0,
-        answersCount: 0,
-        questionId: 1,
-        isProfileShow: false,
-        title: "Questionaries"
+      axios.put("http://localhost:19609/assessment/create", reqBody)
+      .then((response) => {
+        toast("Profile Save. Answer few Questions for Assessment.");
+        let assessmentQuestions = response.data.assessmentQuestions;
+        let profileDetails = response.data;
+
+        this.setState({
+          question: response.data.assessmentQuestions[0].questionDescription,
+          answerOptions: response.data.assessmentQuestions[0].answerInformationList,
+          counter: 0,
+          answersCount: 0,
+          questionCount: 1,
+          isProfileShow: false,
+          title: "Questionaries",
+          assessmentQuestions: assessmentQuestions,
+          profileDetails: profileDetails
+        });
       });
+      
     } else {
       console.error('Invalid Form', this.state.errors)
         toast("Please enter all required fields.");
@@ -166,68 +177,63 @@ class Assessment extends Component {
   handleAnswerSelected(event) {
     this.setUserAnswer(event.currentTarget.value);
 
-    if (this.state.questionId < quizQuestions[this.state.profile.country].length) {
+    if (this.state.questionCount < this.state.assessmentQuestions.length) {
       setTimeout(() => this.setNextQuestion(), 300);
     } else {
-      setTimeout(() => this.setResults(this.getResults()), 300);
+      this.setResults();
     }
   }
 
   setUserAnswer(answer) {
-    this.setState((state, props) => ({
-      answersCount: {
-        ...state.answersCount,
-        [answer]: (state.answersCount[answer] || 0) + 1
-      },
-      answer: answer
-    }));
+    let usersAnswers = {... this.state.usersAnswers};
+    usersAnswers.profileAndBiomedicalAuthorityInfo = {
+        biomedicalAuthorityCode: this.state.profileDetails.biomedical_Authority_Code,
+        profileCode: this.state.profileDetails.profileId
+    }
+    usersAnswers.assessmentAnswers = usersAnswers.assessmentAnswers ? usersAnswers.assessmentAnswers : [];
+    usersAnswers.assessmentAnswers.push(
+      {
+        answerOptionCode: answer,
+        assessmentQuestionCode: this.state.assessmentQuestions[this.state.counter].questionId
+      }
+    )
+    this.setState({
+      usersAnswers: usersAnswers
+    });
+    // TODO. Call api to save answer and get result.
+
+    setTimeout(() => console.log("#1Result", this.state.usersAnswers), 300);
+
   }
 
   setNextQuestion() {
     const counter = this.state.counter + 1;
-    const questionId = this.state.questionId + 1;
+    const questionCount = this.state.questionCount + 1;
 
     this.setState({
       counter: counter,
-      questionId: questionId,
-      question: quizQuestions[this.state.profile.country][counter].question,
-      answerOptions: quizQuestions[this.state.profile.country][counter].answers,
-      answer: ''
+      questionCount: questionCount,
+      question: this.state.assessmentQuestions[counter].questionDescription,
+      answerOptions: this.state.assessmentQuestions[counter].answerInformationList
     });
   }
 
-  getResults() {
-    const answersCount = this.state.answersCount;
-    const answersCountKeys = Object.keys(answersCount);
-    const answersCountValues = answersCountKeys.map(key => answersCount[key]);
-    const maxAnswerCount = Math.max.apply(null, answersCountValues);
 
-    return answersCountKeys.filter(key => answersCount[key] === maxAnswerCount);
-  }
-
-  setResults(result) {
-    if (result.length === 1) {
-      this.setState(
-        {
-           result: result[0],
-           title: "Result"
-          });
-    } else {
-      this.setState({
-        result: 'Undetermined',
-        title: "Result"
-      });
-    }
+  setResults() {
+    this.setState(
+      {
+          result: true,
+          title: "Result"
+        });
   }
 
   renderQuiz() {
     return (
       <Quiz
-        answer={this.state.answer}
         answerOptions={this.state.answerOptions}
-        questionId={this.state.questionId}
+        questionCount={this.state.questionCount}
         question={this.state.question}
-        questionTotal={quizQuestions[this.state.profile.country].length}
+        questionTotal={this.state.assessmentQuestions.length}
         onAnswerSelected={this.handleAnswerSelected}
       />
     );
@@ -249,6 +255,7 @@ class Assessment extends Component {
   }
 
   renderResult() {
+    console.log("render result section");
     return (
       <Result quizResult={this.state.result} />
     )

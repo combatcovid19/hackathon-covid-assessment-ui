@@ -41,7 +41,7 @@ function Result(props) {
 }
 
 Result.propTypes = {
-  quizResult: PropTypes.string.isRequired
+  quizResult: PropTypes.bool.isRequired
 };
 
 export default Result;

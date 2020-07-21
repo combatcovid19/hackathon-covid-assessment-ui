@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function CountryList(props) {
-    console.log("***", props);
   return (
     <>
         <option selected>Select Country</option>

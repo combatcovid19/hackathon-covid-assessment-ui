@@ -102,4 +102,23 @@ export function formValidation(profile, errors){
     }
 }
 
-export default { validateForm, validEmailRegex, validNmberRegex, calculateAge, formValidation };
+export function profileRequestbinder(profile) {
+    return {
+        "assesseFirstName": profile.fname,
+        "assesseLastName": profile.lname,
+        "city": profile.city,
+        "countryCode": profile.country,
+        "dateOfBirth": profile.dob,
+        "districtOrCountyName": profile.districtOrCountyName,
+        "emailId": profile.email,
+        "genderId": profile.gender,
+        "mobileNumber": profile.mobile,
+        "whatsAppNumber": profile.whatsAppNumber,
+        "stateCode": profile.state,
+        "addressLine1": profile.street,
+        "zipcode": profile.zipCode
+    }
+
+}
+
+export default { validateForm, validEmailRegex, validNmberRegex, calculateAge, formValidation, profileRequestbinder };
