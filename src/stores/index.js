@@ -1,7 +1,7 @@
-import SignUpStore from "./SignUpStore";
+import AppStore from "./AppStore";
 
 const stores = {
-    SignUpStore,
+    AppStore,
 };
 
 export default stores;

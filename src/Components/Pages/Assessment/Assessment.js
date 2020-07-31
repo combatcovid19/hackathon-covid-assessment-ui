@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import quizQuestions from './quizQuestions';
-import states from './states';
+import { inject, observer } from "mobx-react";
 import Quiz from './Quiz';
 import Profile from './Profile';
 import Result from './Result';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
+import Spinner from 'react-bootstrap/Spinner';
 import { validateForm, calculateAge, formValidation, profileRequestbinder } from "../../../util/utilityFunction";
 
-class Assessment extends Component {
+const Assessment = inject("stores")(observer(class Assessment extends Component {
   constructor(props) {
     super(props);
 
@@ -24,12 +24,14 @@ class Assessment extends Component {
       profileDetails: {},
       assessmentQuestions: [],
       usersAnswers: [],
+      assessmentScore: 0,
+      providerList: [],
       profile: {
         fname: "",
         lname: "",
         dob: "",
         age: 0,
-        gender: "",
+        gender: "MAL",
         email: "",
         mobile: "",
         whatsAppNumber: "",
@@ -61,9 +63,11 @@ class Assessment extends Component {
   }
 
   componentDidMount() {
+    this.props.stores.AppStore.setLoading(true);
     let profile = { ...this.state.profile };
     axios.get('http://localhost:19609/assessment/countries')
       .then((response) => {
+        this.props.stores.AppStore.setLoading(false);
         profile.countryList = response.data;
         this.setState({
           profile
@@ -136,6 +140,7 @@ class Assessment extends Component {
   }
   submitProfileDetail = (e) => {
     e.preventDefault();
+    this.props.stores.AppStore.setLoading(true);
     let profile = { ...this.state.profile };
     
     let reqBody = profileRequestbinder(profile);
@@ -145,9 +150,11 @@ class Assessment extends Component {
       console.info('Valid Form')
       axios.put("http://localhost:19609/assessment/create", reqBody)
       .then((response) => {
-        toast("Profile Save. Answer few Questions for Assessment.");
+        toast("Thanks for the information. Request you to answer few questions for assessment.");
+        console.log("**response", response.data);
         let assessmentQuestions = response.data.assessmentQuestions;
         let profileDetails = response.data;
+        this.props.stores.AppStore.setLoading(false);
 
         this.setState({
           question: response.data.assessmentQuestions[0].questionDescription,
@@ -165,6 +172,7 @@ class Assessment extends Component {
     } else {
       console.error('Invalid Form', this.state.errors)
         toast("Please enter all required fields.");
+        this.props.stores.AppStore.setLoading(false);
       this.setState({
         profile,
         errors
@@ -188,7 +196,8 @@ class Assessment extends Component {
     let usersAnswers = {... this.state.usersAnswers};
     usersAnswers.profileAndBiomedicalAuthorityInfo = {
         biomedicalAuthorityCode: this.state.profileDetails.biomedical_Authority_Code,
-        profileCode: this.state.profileDetails.profileId
+        profileCode: this.state.profileDetails.profileId,
+        profileZipCode: this.state.profile.zipCode
     }
     usersAnswers.assessmentAnswers = usersAnswers.assessmentAnswers ? usersAnswers.assessmentAnswers : [];
     usersAnswers.assessmentAnswers.push(
@@ -197,12 +206,10 @@ class Assessment extends Component {
         assessmentQuestionCode: this.state.assessmentQuestions[this.state.counter].questionId
       }
     )
-    this.setState({
-      usersAnswers: usersAnswers
-    });
-    // TODO. Call api to save answer and get result.
+      this.setState({
+        usersAnswers: usersAnswers
+      });
 
-    setTimeout(() => console.log("#1Result", this.state.usersAnswers), 300);
 
   }
 
@@ -220,11 +227,21 @@ class Assessment extends Component {
 
 
   setResults() {
-    this.setState(
-      {
-          result: true,
-          title: "Result"
-        });
+    this.props.stores.AppStore.setLoading(true);
+    axios.post("http://localhost:19609/assessment/save", this.state.usersAnswers)
+      .then((response) => {
+        console.log("***Save", response);
+        this.props.stores.AppStore.setLoading(false);
+        this.props.stores.AppStore.providers(response.data.nearestProviders);
+        this.setState(
+          {
+              result: true,
+              title: "Result",
+              assessmentScore: response.data.assessmentScore,
+              providerList: response.data.nearestProviders
+            });
+        
+      });
   }
 
   renderQuiz() {
@@ -255,9 +272,8 @@ class Assessment extends Component {
   }
 
   renderResult() {
-    console.log("render result section");
     return (
-      <Result quizResult={this.state.result} />
+      <Result quizResult={this.state.result} assessmentScore={this.state.assessmentScore} />
     )
   }
 
@@ -265,6 +281,7 @@ class Assessment extends Component {
     return (
       <div className="row assement-page mb-5">
         <ToastContainer />
+        {this.props.stores.AppStore.isLoading && <Spinner animation="border" variant="primary" />}
         <div className="col-sm-10 offset-sm-1">
           <div className="caption flex-space-between">
             <p className="formTitle">{this.state.title}</p>
@@ -276,6 +293,6 @@ class Assessment extends Component {
       </div>
     );
   }
-}
+}))
 
 export default Assessment;
